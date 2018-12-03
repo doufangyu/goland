@@ -23,7 +23,7 @@ func learImooc()  {
 }
 
 func main() {
-	fmt.Println("")
+	fmt.Println(a)
 	learImooc()
 	fmt.Println("const is ,",name)
 }
