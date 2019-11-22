@@ -1,16 +1,14 @@
 package main
 
 import (
-	"golang.org/x/crypto/ssh"
-	"log"
-	"time"
 	"fmt"
-	"os"
-	"net"
+	"golang.org/x/crypto/ssh"
 	"golang.org/x/crypto/ssh/terminal"
-
+	"log"
+	"net"
+	"os"
+	"time"
 )
-
 
 func connect(user, password, host string, port int) (*ssh.Session, error) {
 	var (
@@ -26,8 +24,8 @@ func connect(user, password, host string, port int) (*ssh.Session, error) {
 	auth = append(auth, ssh.Password(password))
 	// 重点在这里，这的HostKeyCallback十分的重要
 	clientConfig = &ssh.ClientConfig{
-		User: user,
-		Auth: auth,
+		User:    user,
+		Auth:    auth,
 		Timeout: 30 * time.Second,
 		HostKeyCallback: func(hostname string, remote net.Addr, key ssh.PublicKey) error {
 			return nil

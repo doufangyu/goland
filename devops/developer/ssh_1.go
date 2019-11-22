@@ -1,14 +1,13 @@
 package main
 
 import (
+	"fmt"
 	"golang.org/x/crypto/ssh"
 	"log"
-	"time"
-	"fmt"
-	"os"
 	"net"
+	"os"
+	"time"
 )
-
 
 func connect(user, password, host string, port int) (*ssh.Session, error) {
 	var (
@@ -24,8 +23,8 @@ func connect(user, password, host string, port int) (*ssh.Session, error) {
 	auth = append(auth, ssh.Password(password))
 	// 重点在这里，这的HostKeyCallback十分的重要
 	clientConfig = &ssh.ClientConfig{
-		User: user,
-		Auth: auth,
+		User:    user,
+		Auth:    auth,
 		Timeout: 30 * time.Second,
 		HostKeyCallback: func(hostname string, remote net.Addr, key ssh.PublicKey) error {
 			return nil
@@ -47,9 +46,8 @@ func connect(user, password, host string, port int) (*ssh.Session, error) {
 	return session, nil
 }
 
-
-func main()  {
-	session,err := connect("root","iopjklbnm123.","47.52.207.109",22)
+func main() {
+	session, err := connect("root", "iopjklbnm123.", "47.52.207.109", 22)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -58,5 +56,5 @@ func main()  {
 	session.Stdout = os.Stdout
 	session.Stderr = os.Stderr
 	session.Run("yum -y install http")
-	
+
 }

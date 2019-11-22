@@ -8,7 +8,7 @@ import (
 
 func main() {
 	rand.Seed(time.Now().UnixNano())
-	var a [100]int
+	var a [5]int
 
 	n := len(a)
 
